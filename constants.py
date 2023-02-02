@@ -17,6 +17,21 @@ L_FORMAT_OPERATIONS = {
    "sw": "101011"
 }
 
+L_FORMAT_ADD_OPERATIONS = {
+   "addi": "001000",
+   "addiu": "001001"
+}
+
+L_FORMAT_LOOP_OPERATIONS = {
+   "beq": "000100",
+   "bne": "000101"
+}
+
+L_FORMAT_WORD_OPERATIONS = {
+   "lw": "100011",
+   "sw": "101011"
+}
+
 J_FORMAT_OPERATIONS = {
    "J": "000010"
 }
