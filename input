@@ -1,1 +1,5 @@
-lw $9, 12($8)
+Loop: beq $9, $0, End
+      add $8, $8, $10
+      addi $9, $9, -1
+      j Loop
+End:

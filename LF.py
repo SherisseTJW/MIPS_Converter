@@ -1,4 +1,4 @@
-from constants import L_FORMAT_LOOP_OPERATIONS, L_FORMAT_ADD_OPERATIONS, L_FORMAT_OPERATIONS, L_FORMAT_WORD_OPERATIONS
+from constants import L_FORMAT_ADD_OPERATIONS, L_FORMAT_OPERATIONS, L_FORMAT_WORD_OPERATIONS
 from utils import convertToBinaryStr
 
 '''
@@ -26,6 +26,8 @@ def convertLMIPSToBinary(MIPS_Instruction):
       return convertAddOperationsToBinary(MIPS_Instruction)
    elif MIPS_Instruction[0] in L_FORMAT_WORD_OPERATIONS:
       return convertWordOperationsToBinary(MIPS_Instruction)
+   else:
+      raise Exception("Invalid/Unsupported L-Format Operation")
 
 def convertAddOperationsToBinary(MIPS_Instruction):
    opcode = L_FORMAT_OPERATIONS.get(MIPS_Instruction[0])
