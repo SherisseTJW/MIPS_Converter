@@ -11,7 +11,7 @@ rt -> Destination Register
 shamt -> Shift Amount (only for sll, srl)
 funct -> 0 for sll, srl, 32 otherwise
 '''
-def convertMIPSToBinary(MIPS_Instruction):
+def convertRMIPSToBinary(MIPS_Instruction):
    opcode = R_FORMAT_OPERATIONS.get(MIPS_Instruction[0])
    rd = convertToBinaryStr(MIPS_Instruction[1][1:], 5)
 
