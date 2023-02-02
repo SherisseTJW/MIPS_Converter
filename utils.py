@@ -18,3 +18,7 @@ def convertToBinaryStr(decimalInput, length):
 
 
    return binary 
+
+def convertBinaryToHex(binaryInput):
+   decimalRepresentation = int(binaryInput, 2)
+   return hex(decimalRepresentation)[2:]

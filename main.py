@@ -1,5 +1,5 @@
 from constants import R_FORMAT_OPERATIONS
-from utils import readDataFromInput
+from utils import readDataFromInput, convertBinaryToHex
 from RF import convertMIPSToBinary
 
 if __name__ == "__main__":
@@ -11,4 +11,6 @@ if __name__ == "__main__":
       operation = instruction[0].lower()
 
       if operation in R_FORMAT_OPERATIONS:
-         print(f"Binary representation: {convertMIPSToBinary(instruction)}")
+         binary = convertMIPSToBinary(instruction)
+         print(f"Binary representation: {binary}")
+         print(f"Hexadecimal representation: {convertBinaryToHex(binary)}")
