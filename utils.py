@@ -10,3 +10,11 @@ def readDataFromInput(filename = None):
    f.close()
 
    return MIPS_Instruction
+
+def convertToBinaryStr(decimalInput, length):
+   binary = str(bin(int(decimalInput))[2:])
+   while len(binary) < length:
+      binary = "0" + binary
+
+
+   return binary 
