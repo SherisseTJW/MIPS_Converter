@@ -18,3 +18,4 @@ if __name__ == "__main__":
       elif operation in L_FORMAT_OPERATIONS:
          binary = convertLMIPSToBinary(instruction)
          print(f"Binary representation: {binary}")
+         print(f"Hexadecimal representation: {convertBinaryToHex(binary)}")

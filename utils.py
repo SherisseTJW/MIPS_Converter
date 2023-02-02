@@ -15,7 +15,7 @@ def convertToBinaryStr(decimalInput, length):
    decimalInput = int(decimalInput)
 
    if decimalInput < 0:
-      convertNegativeDecimalTo2sComplement(decimalInput, length)
+      binary = convertNegativeDecimalTo2sComplement(decimalInput, length)
    else:
       binary = str(bin(decimalInput)[2:])
 
@@ -25,7 +25,10 @@ def convertToBinaryStr(decimalInput, length):
    return binary 
 
 def convertNegativeDecimalTo2sComplement(decimalInput, length):
-   binary = str(bin(decimalInput)[2:])
+   binary = str(bin(decimalInput)[3:])
+   binary = list(binary)
+
+   ### Invert all the bits
    for i in range(0, len(binary)):
       bit = binary[i]
       if bit == "0":
@@ -44,9 +47,12 @@ def convertNegativeDecimalTo2sComplement(decimalInput, length):
       else:
          binary[i] = "0"
          continue
+   binary = "".join(binary[::-1])
 
-   print(binary)
+   while len(binary) < length:
+      binary = "1" + binary
 
+   return binary
 
 def convertBinaryToHex(binaryInput):
    decimalRepresentation = int(binaryInput, 2)
