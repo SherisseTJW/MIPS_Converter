@@ -1,3 +1,4 @@
+from InvalidInputException import InvalidInputException
 from constants import L_FORMAT_OPERATIONS, R_FORMAT_OPERATIONS
 from utils import readDataFromInput, convertBinaryToHex
 from RF import convertRMIPSToBinary
@@ -16,6 +17,8 @@ if __name__ == "__main__":
          binary = convertRMIPSToBinary(instruction)
       elif operation in L_FORMAT_OPERATIONS:
          binary = convertLMIPSToBinary(instruction)
+      else:
+         raise InvalidInputException()
    else:
       binary = convertBranchMIPSToBinary(MIPS_Instruction)
 
