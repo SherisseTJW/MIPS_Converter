@@ -1,5 +1,5 @@
 from constants import L_FORMAT_LOOP_OPERATIONS
-from utils import convertToBinaryStr
+from utils import convertToBinaryStr, getRegisterNumber
 
 def convertBranchMIPSToBinary(MIPS_Instruction):
    for i in range(0, len(MIPS_Instruction)):
@@ -22,8 +22,8 @@ def convertLFBranchToBinary(MIPS_Instruction, operation):
 
 
    opcode = L_FORMAT_LOOP_OPERATIONS.get(operation)
-   rs = convertToBinaryStr(baseInstruction[2][1:], 5)
-   rt = convertToBinaryStr(baseInstruction[3][1:], 5)
+   rs = convertToBinaryStr(getRegisterNumber(baseInstruction[2]), 5)
+   rt = convertToBinaryStr(getRegisterNumber(baseInstruction[3]), 5)
    immediate = convertToBinaryStr(immediate, 16)
 
    return opcode + rs + rt + immediate
