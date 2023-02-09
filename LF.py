@@ -1,6 +1,6 @@
 from InvalidInputException import InvalidInputException
 from constants import L_FORMAT_ADD_OPERATIONS, L_FORMAT_OPERATIONS, L_FORMAT_WORD_OPERATIONS
-from utils import convertToBinaryStr
+from utils import convertToBinaryStr, getRegisterNumber
 
 '''
 L-Format Operations: 
@@ -32,8 +32,8 @@ def convertLMIPSToBinary(MIPS_Instruction):
 
 def convertAddOperationsToBinary(MIPS_Instruction):
    opcode = L_FORMAT_OPERATIONS.get(MIPS_Instruction[0])
-   rs = convertToBinaryStr(MIPS_Instruction[2][1:], 5)
-   rt = convertToBinaryStr(MIPS_Instruction[1][1:], 5)
+   rs = convertToBinaryStr(getRegisterNumber(2), 5)
+   rt = convertToBinaryStr(getRegisterNumber(1), 5)
    immediate = convertToBinaryStr(MIPS_Instruction[3], 16)
 
    return opcode + rs + rt + immediate
@@ -43,9 +43,7 @@ def convertWordOperationsToBinary(MIPS_Instruction):
    rt = convertToBinaryStr(MIPS_Instruction[1][1:], 5)
 
    operand2 = MIPS_Instruction[2].split("(")
-   immediate = operand2[0]
-   immediate = convertToBinaryStr(immediate, 16)
-   rs = operand2[1][1:][:-1]
-   rs = convertToBinaryStr(rs, 5)
+   immediate = convertToBinaryStr(operand2[0], 16)
+   rs = convertToBinaryStr(getRegisterNumber(operand2[1][:-1]), 5)
 
    return opcode + rs + rt + immediate

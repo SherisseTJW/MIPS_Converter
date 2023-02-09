@@ -1,3 +1,5 @@
+from constants import REGISTER_NUMBER_MAPPING
+
 def readDataFromInput(filename = None):
    MIPS_Instruction = []
 
@@ -10,6 +12,13 @@ def readDataFromInput(filename = None):
    f.close()
 
    return MIPS_Instruction
+
+def getRegisterNumber(registerName: str):
+   if registerName not in REGISTER_NUMBER_MAPPING:
+      return registerName[1:]
+      pass
+
+   return REGISTER_NUMBER_MAPPING.get(registerName)
 
 def convertToBinaryStr(decimalInput, length):
    decimalInput = int(decimalInput)
