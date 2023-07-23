@@ -4,6 +4,7 @@ from Modules.tokens import token_kind
 
 class Lexer:
     init_token = Token(INIT, None, None)
+    eof_token = Token(EOF, None, None)
 
     def __init__(self, text):
         # Expect this text to be the contents of a file
@@ -16,31 +17,60 @@ class Lexer:
         self.__current_token_kind = None
         self.__current_token_value = None
 
+        self.__tokens = []
+
     def run(self):
         """
         The entry function for the Lexer. Returns all the tokens after tokenising the text passed in
         """
 
-        current_token = Lexer.init_token
-        tokens = [current_token]
+        self.__tokens.append(Lexer.init_token)
 
-        while True:
-            current_token = self.__get_next_token()
-            tokens.append(current_token)
+        for line in self.__text:
+            current_line_tokens = self.__tokenise_next_line(line)
+            self.__tokens.append(current_line_tokens)
 
-            if current_token.token_type == EOF:
-                break
-
-        return tokens
+        self.__tokens.append(Lexer.eof_token)
+        print(self.__tokens)
+        return self.__tokens
 
 
-    def __get_next_token(self):
-        print(self.__text)
+    def __tokenise_next_line(self, line):
+        line_tokens = []
+        line = line.strip().split(" ")
 
-        return Token(EOF, None, None)
+        for value in line:
+            current_token = self.__tokenise(value)
+            line_tokens.append(current_token)
 
-    def __advance(self):
-        pass
+        return line_tokens
 
-    def __peek(self):
-        pass
+    
+    def __tokenise(self, value):
+        if value[-1] == ":":
+            self.__current_token_value = value[:-1]
+            self.__current_token_type = LABEL
+            self.__current_token_kind = None
+
+        elif value[0] == "$":
+            if value[-1] == ",":
+                self.__current_token_value = value[:-1]
+            else:
+                self.__current_token_value = value
+
+            self.__current_token_type = OPERAND
+            self.__current_token_kind = token_kind.OPERAND["REGISTER"]
+
+        elif value.isdigit():
+            self.__current_token_value = value
+            self.__current_token_type = OPERAND
+            self.__current_token_kind = token_kind.OPERAND["NUMBER"]
+
+        else:
+            self.__current_token_value = value.upper()
+            self.__current_token_type = INSTRUCTION
+            self.__current_token_kind = token_kind.INSTRUCTION[self.__current_token_value]
+
+        return Token(self.__current_token_type, self.__current_token_kind, self.__current_token_value)
+
+    

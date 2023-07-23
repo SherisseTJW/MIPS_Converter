@@ -13,3 +13,10 @@ class Token:
 
     def get_value(self):
         return self.token_value
+
+    def __str__(self):
+        if self.token_kind:
+            return f"{self.token_kind} {self.token_type} Token with value {self.token_value}"
+
+
+        return f"{self.token_type} Token with value {self.token_value}"

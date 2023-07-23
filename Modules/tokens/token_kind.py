@@ -1,7 +1,8 @@
 INSTRUCTION = {
     "AND" : "AND",
+    "ADD" : "ADD",
     "SUB" : "SUB",
-    "ANDI" : "ANDI",
+    "ADDI" : "ADDI",
 }
 
 OPERAND = {
